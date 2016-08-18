@@ -1,0 +1,84 @@
+package selrcdemo;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.*;
+
+public class TestCase {
+	
+	private static WebDriver driver;
+	private static String baseUrl;
+	private boolean acceptNextAlert = true;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.firefox.marionette","C:\\seleniumFirefoxDriver\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		baseUrl = "http://www.floods.ie/";
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		TestCase test = new TestCase();
+		try {
+			test.testSeleniumJava();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void testSeleniumJava() throws Exception {
+		driver.get(baseUrl + "/index.aspx?ReturnUrl=%2fView%2fDefault.aspx");
+		driver.findElement(By.cssSelector("img[alt=\"General User - Enter Site\"]")).click();
+		driver.findElement(By.id("AcceptDisclaimer")).click();
+	    // ERROR: Caught exception [ERROR: Unsupported command [selectFrame | selectlocationframe | ]]
+	    new Select(driver.findElement(By.id("County"))).selectByVisibleText("Dublin");
+	    new Select(driver.findElement(By.id("Town"))).selectByVisibleText("Dublin City South");
+	    driver.findElement(By.id("Street")).clear();
+	    driver.findElement(By.id("Street")).sendKeys("trinity street");
+	    driver.findElement(By.id("BasicCountySearchButton")).click();
+	    
+	   /* List<WebElement> resultTable = driver.findElements(By.className("Results"));
+	    for(WebElement eachTitle : resultTable){
+			System.out.println(eachTitle.getText());
+		}*/
+	  }
+	
+	private boolean isElementPresent(By by) {
+	    try {
+	      driver.findElement(by);
+	      return true;
+	    } catch (NoSuchElementException e) {
+	      return false;
+	    }
+	  }
+	
+	  private boolean isAlertPresent() {
+		    try {
+		      driver.switchTo().alert();
+		      return true;
+		    } catch (NoAlertPresentException e) {
+		      return false;
+		    }
+		  }
+	  
+	  private String closeAlertAndGetItsText() {
+		    try {
+		      Alert alert = driver.switchTo().alert();
+		      String alertText = alert.getText();
+		      if (acceptNextAlert) {
+		        alert.accept();
+		      } else {
+		        alert.dismiss();
+		      }
+		      return alertText;
+		    } finally {
+		      acceptNextAlert = true;
+		    }
+		  }
+
+}

@@ -1,0 +1,40 @@
+package selrcdemo;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class elementSelector {
+	
+	/*String driverPath = "<path to gecko driver executable>";
+	System.setProperty("webdriver.gecko.driver", driverPath+"geckodriver.exe");
+	WebDriver firefox = new FirefoxDriver();
+	String URL = "http://www.speakingcs.com/";*/
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		/*elementSelector ese = new elementSelector();
+		ese.getPostTitles();*/
+		WebDriver driver = new FirefoxDriver();
+		 
+	       driver.get("http://www.google.com");
+	 
+	       driver.quit();
+		
+	}
+
+	/*private void getPostTitles() {
+		// TODO Auto-generated method stub
+		firefox.get(URL);
+		List<WebElement> postTitles = firefox.findElements(By.className("entry-header"));
+		for(WebElement eachTitle : postTitles){
+			System.out.println(eachTitle.getText());
+		}
+		
+	}*/
+	
+
+}
